@@ -24,9 +24,16 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser
+
     # Ejecutar los scrapers
     - name: Ejecutacion de scrapers
       run: |
+        export DISPLAY=:99.0  # Necesario para ejecutar en headless
+        nohup Xvfb :99 &  # Iniciar X virtual framebuffer
         python HM.py
         python KOAJ.py
         python PULLBEAR.py
