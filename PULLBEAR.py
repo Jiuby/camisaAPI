@@ -7,13 +7,16 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Construir la ruta al driver de Edge
 current_dir = os.path.dirname(os.path.abspath(__file__))
-driver_path = os.path.join(current_dir, "edgedriver_win64", "msedgedriver.exe")
+options = Options()
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 
 # Configurar opciones para el navegador en modo headless
-options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 

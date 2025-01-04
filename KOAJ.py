@@ -7,12 +7,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
+from webdriver_manager.chrome import ChromeDriverManager
+
+options = Options()
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-driver_path = os.path.join(current_dir, "edgedriver_win64", "msedgedriver.exe")
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 
 # Configurar opciones para el navegador en modo headless
-options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 

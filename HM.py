@@ -3,19 +3,24 @@ import time
 import json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from selenium.webdriver.edge.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
+
 
 def analizar_pagina(url):
-    # Construir la ruta al driver de Edge
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    driver_path = os.path.join(current_dir, "edgedriver_win64", "msedgedriver.exe")
+
 
     # Configurar opciones para el navegador en modo headless
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
+
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    driver_path = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     service = Service(executable_path=driver_path)
     driver = webdriver.Chrome(service=service, options=options)
